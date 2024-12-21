@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import productSchema from "./schema";
+import prisma from "@/prisma/client";
 
-export function GET(request: NextRequest) {
-  return NextResponse.json([
-    { id: 1, name: "Milk", price: 30.0 },
-    { id: 2, name: "Bread", price: 40.0 },
-  ]);
+export async function GET(request: NextRequest) {
+  const products = await prisma.product.findMany();
+  return NextResponse.json(products);
 }
 
 interface Props {
@@ -23,8 +22,12 @@ export async function POST(request: NextRequest, { params }: Props) {
   if (!validation.success)
     return NextResponse.json(validation.error.errors, { status: 400 });
 
-  return NextResponse.json(
-    { id: 4, name: body.name, price: body.price },
-    { status: 201 }
-  );
+  const product = await prisma.product.create({
+    data: {
+      name: body.name,
+      price: body.price,
+    },
+  });
+
+  return NextResponse.json(product, { status: 201 });
 }

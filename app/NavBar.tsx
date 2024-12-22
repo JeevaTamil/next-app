@@ -11,9 +11,10 @@ const NavBar = () => {
     { label: "Users", link: "/users" },
     { label: "Products", link: "/products" },
     { label: "Admins", link: "/admins" },
+    { label: "Upload", link: "/upload" },
   ];
   return (
-    <div className="flex bg-slate-300">
+    <div className="flex bg-neutral text-neutral-content">
       <div className="p-4 mr-10">
         <Link href="/">Home</Link>
       </div>

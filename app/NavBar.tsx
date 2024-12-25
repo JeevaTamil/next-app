@@ -36,9 +36,6 @@ const NavBar = () => {
           <Link href={item.link}>{item.label}</Link>
         </div>
       ))}
-      <button onClick={() => signIn("google", { prompt: "login" })}>
-        Google signin
-      </button>
 
       {status === "loading" && (
         <span className="loading loading-spinner loading-sm items-center"></span>

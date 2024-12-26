@@ -5,6 +5,7 @@ import Link from "next/link";
 import React from "react";
 
 interface NavItem {
+  id: string;
   label: string;
   link: string;
 }
@@ -13,17 +14,41 @@ const NavBar = () => {
   const { status, data: session } = useSession();
 
   const navItems: NavItem[] = [
-    { label: "Users", link: "/users" },
-    { label: "Products", link: "/products" },
-    { label: "Admins", link: "/admins" },
-    { label: "Upload", link: "/upload" },
+    { id: "users", label: "Users", link: "/users" },
+    {
+      label: "Products",
+      link: "/products",
+      id: "products",
+    },
+    {
+      label: "Admins",
+      link: "/admins",
+      id: "admins",
+    },
+    {
+      label: "Upload",
+      link: "/upload",
+      id: "upload",
+    },
   ];
 
   if (status === "authenticated") {
-    navItems.push({ label: session.user!.name!, link: "/" });
-    navItems.push({ label: "Signout", link: "/api/auth/signout" });
+    navItems.push({
+      label: session.user!.name!,
+      link: "/",
+      id: "",
+    });
+    navItems.push({
+      label: "Signout",
+      link: "/api/auth/signout",
+      id: "",
+    });
   } else if (status === "unauthenticated") {
-    navItems.push({ label: "Signin", link: "/api/auth/signin" });
+    navItems.push({
+      label: "Signin",
+      link: "/api/auth/signin",
+      id: "",
+    });
   }
   return (
     <div className="flex bg-neutral text-neutral-content">
@@ -32,7 +57,7 @@ const NavBar = () => {
       </div>
 
       {navItems.map((item) => (
-        <div className="p-4">
+        <div className="p-4" key={item.id}>
           <Link href={item.link}>{item.label}</Link>
         </div>
       ))}

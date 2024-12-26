@@ -1,13 +1,14 @@
 import React from "react";
 
 interface Props {
-  params: {
+  params: Promise<{
     userId: number;
     photoId: number;
-  };
+  }>;
 }
 
-const UserDetailPhotoPage = ({ params: { userId, photoId } }: Props) => {
+const UserDetailPhotoPage = async ({ params }: Props) => {
+  const { userId, photoId } = await params;
   return (
     <div>
       <h2>UserId {userId}</h2>

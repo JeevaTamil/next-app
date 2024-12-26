@@ -7,7 +7,13 @@ interface Props {
   };
 }
 
-const UserDetailPage = ({ params: { userId } }: Props) => {
+const UserDetailPage = async ({
+  params,
+}: {
+  params: Promise<{ userId: number }>;
+}) => {
+  const { userId } = await params;
+
   if (userId > 10) notFound();
 
   return (

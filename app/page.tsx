@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import ProductCart from "./components/ProductCart";
 import { getServerSession } from "next-auth";
-import { providerOptions } from "./api/auth/[...nextauth]/route";
 import tree from "@/public/images/trees.jpg";
+import { providerOptions } from "./api/auth/providerOptions";
 
 export default async function Home() {
   const session = await getServerSession(providerOptions);
